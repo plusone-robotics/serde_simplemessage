@@ -1,7 +1,12 @@
 [package]
 name = "simple_message"
 version = "0.2.0"
+categories = ["encoding", "parser-implementations"]
 edition = "2024"
+keywords = ["simplemessage", "serde", "serialization", "encoding"]
+license = "Apache-2.0"
+description = "A library for encoding and decoding SimpleMessage messages using serde."
+repository = "https://github.com/plusone-robotics/serde_simplemessage"
 
 [dependencies]
 byteorder = "1.5.0"
