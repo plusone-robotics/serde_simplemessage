@@ -6,6 +6,11 @@ SimpleMessage is a messaging protocol used by the ROS-Industrial project for com
 
 This library provides a way to encode and decode SimpleMessage messages in Rust using the serde library.
 
+## Links
+
+- See on crates.io: [link](https://crates.io/crates/simple_message)
+- See on GitHub [link](https://github.com/plusone-robotics/serde_simplemessage)
+
 # Example
 
 ```rust
