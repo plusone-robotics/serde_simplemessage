@@ -10,6 +10,7 @@ This library provides a way to encode and decode SimpleMessage messages in Rust 
 
 - See on crates.io: [link](https://crates.io/crates/simple_message)
 - See on GitHub [link](https://github.com/plusone-robotics/serde_simplemessage)
+- Visit [Plus One Robotics](https://plusonerobotics.com)
 
 # Example
 
