@@ -8,11 +8,12 @@ This library provides a way to encode and decode SimpleMessage messages in Rust 
 
 ## Links
 
-- See on crates.io: [link](https://crates.io/crates/simple_message)
-- See on GitHub [link](https://github.com/plusone-robotics/serde_simplemessage)
+- [AI Disclosure and Contribution Policy](https://github.com/plusone-robotics/serde_simplemessage/blob/main/CONTRIBUTING.md)
+- [See on crates.io](https://crates.io/crates/simple_message)
+- [See on GitHub](https://github.com/plusone-robotics/serde_simplemessage)
 - Visit [Plus One Robotics](https://plusonerobotics.com)
 
-# Example
+## Example
 
 ```rust
 use simple_message::{*, de::from_bytes, ser::encode_to_bytes};
@@ -56,7 +57,7 @@ match decoded_header.msg_type {
 }
 ```
 
-# Gotchas to be aware of
+## Gotchas to be aware of
 
 ## Not all Rust types can be encoded in SimpleMessage.
 
@@ -107,7 +108,7 @@ In API docs, this should be explicitly described, with a field specifying the le
 
 By default, enum variants are encoded as a `i32` using their corresponding _index_ (i.e. position in the source). If you need to use specific integer values for enum variants, you must use `#[repr(<integer type>)]` and `#[derive(Serialize_repr, Deserialize_repr)]` in order for those values to be used for encoding/decoding. Note that all enum integer types except u8 will still be encoded as an `i32` on the wire.
 
-# Overview of the SimpleMessage protocol
+## Overview of the SimpleMessage protocol
 
 SimpleMessage has 4 fundamental datatypes over the wire:
 
@@ -128,9 +129,9 @@ SimpleMessage messages have a header that contains the length of the message, th
 
 The exact meaning of the message type is defined by the API specification for the device you are communicating with. A common set of message types is defined in the `standard_types` module, but you will likely need to define your own.
 
-# SimpleMessage Encoding
+## SimpleMessage Encoding
 
-## Prefix format
+### Prefix format
 
 All SimpleMessage messages start with a 4-byte length prefix. According to the specification, this is not considered part of the message, but it describes the combined length of the header and the message payload to follow.
 
@@ -142,7 +143,7 @@ Note that since all integers in SimpleMessage are encoded as a _signed_ integer,
 
 Note that in this library, the length field is included as part of the `PrefixAndHeader` struct for convenience.
 
-## Header format
+### Header format
 
 The next 12 bytes contain the header, which instructs the receiver how to handle the payload that follows.
 
@@ -152,19 +153,19 @@ The next 12 bytes contain the header, which instructs the receiver how to handle
 | `comm_type` | `shared_int` | 4 | The communication type, specifying whether the message is a request, reply, or one-way topic update. |
 | `reply_code` | `shared_int` | 4 | The reply code indicating success or failure, typically only used for ServiceReply messages. |
 
-## Payload format
+### Payload format
 
 The payload format is identified by the message type specified in the header. The precise definition of the payload is application specific. Some standard message types and payload definitions are provided in the `standard_types` module.
 
 As an example, here is a definition of the `JointTrajPt` payload (identified by message type `MSG_TYPE_JOINT_TRAJ_PT`):
 
-### `JointData`
+#### `JointData`
 
 | Field | Type | Size | Description |
 | --- | --- | --- | --- |
 | `joints` | `shared_real[10]` | 40 | The joint positions (units are specific to the robot controller). |
 
-### `JointTrajPt`
+#### `JointTrajPt`
 
 | Field | Type | Size | Description |
 | --- | --- | --- | --- |
